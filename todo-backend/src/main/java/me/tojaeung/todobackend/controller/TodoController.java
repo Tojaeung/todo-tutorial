@@ -18,13 +18,13 @@ import java.util.Optional;
 public class TodoController {
     private final TodoService todoService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<TodoDto> createTodo(@RequestBody CreateTodoDto createTodoDto) {
         TodoDto todoDto = todoService.createDto(createTodoDto);
         return new ResponseEntity<>(todoDto, HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<TodoDto> getTodos(@RequestParam Optional<Boolean> completed) {
         if (completed.isPresent()) return todoService.getTodos(completed.get());
         else return todoService.getTodos();

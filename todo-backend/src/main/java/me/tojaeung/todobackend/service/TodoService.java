@@ -5,6 +5,7 @@ import me.tojaeung.todobackend.domain.Todo;
 import me.tojaeung.todobackend.dto.CreateTodoDto;
 import me.tojaeung.todobackend.dto.TodoDto;
 import me.tojaeung.todobackend.dto.UpdateTodoDto;
+import me.tojaeung.todobackend.exception.TodoException;
 import me.tojaeung.todobackend.repository.TodoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
