@@ -1,10 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import styles from 'styles/todoList.module.css';
-import { debounce } from 'lodash';
-import Todo from 'components/Todo';
+import axios from 'axios';
 
 function TodoList() {
-  return <div>TodoList</div>;
+  return <div></div>;
 }
 
 export default TodoList;

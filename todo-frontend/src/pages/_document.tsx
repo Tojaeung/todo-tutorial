@@ -7,7 +7,10 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <body>
-          <Head></Head>
+          <Head>
+            <meta name="description" content="todo" />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
           <Main />
           <NextScript />
         </body>

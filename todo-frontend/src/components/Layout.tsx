@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from 'styles/layout.module.css';
 
 interface IProps {
   children: React.ReactNode;
@@ -7,8 +6,8 @@ interface IProps {
 
 function Layout({ children }: IProps) {
   return (
-    <div className={styles.layout}>
-      <h1 className={styles.title}>Todo</h1>
+    <div>
+      <h1>Todo</h1>
       {children}
     </div>
   );
