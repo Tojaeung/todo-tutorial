@@ -8,7 +8,8 @@ export default class MyDocument extends Document {
       <Html>
         <body>
           <Head>
-            <meta name="description" content="todo" />
+            <html lang="ko" />
+            <meta charSet="utf-8" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Main />

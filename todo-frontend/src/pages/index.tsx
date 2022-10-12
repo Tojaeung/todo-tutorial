@@ -1,26 +1,31 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { HomeContainer, Title, InputBox, AddButton } from '@styles/home';
-import { TextField } from '@mui/material';
+import HeadMeta from '@components/HeadMeta';
 import TodoList from '@components/TodoList';
+import { Container, Typography } from '@mui/material';
+import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Head>
-        <title>토재웅님의 간단한 Todo</title>
-      </Head>
-      <HomeContainer maxWidth="sm">
-        <Title variant="h3">간단한 Todo App</Title>
-        <InputBox>
-          <TextField variant="standard" label="입력" size="medium" />
-          <AddButton variant="contained" size="medium">
-            추가
-          </AddButton>
-        </InputBox>
-        <TodoList />
-      </HomeContainer>
-    </>
+    <Container
+      maxWidth="sm"
+      sx={{
+        margin: '0 1',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '10px',
+      }}
+    >
+      <HeadMeta
+        title="todoApp"
+        description="간단한 투두앱"
+        image="http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg"
+        url="https://www.naver.com"
+      />
+      <Typography sx={{ p: '40px 0' }} variant="h3">
+        간단한 Todo App
+      </Typography>
+      <TodoList />
+    </Container>
   );
 };
 
