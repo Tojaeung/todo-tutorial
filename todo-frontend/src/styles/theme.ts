@@ -1,46 +1,20 @@
-import { createTheme } from '@mui/material/styles';
+import { DefaultTheme } from 'styled-components';
 
-export const colors = {
-  primary: '#5f2c3e',
-  secondary: '#d1adcc',
-  success: '#4CAF50',
-  info: '#00a2ff',
-  danger: '#FF5722',
-  warning: '#FFC107',
-  dark: '#0e1b20',
-  light: '#aaa',
-  muted: '#abafb3',
-  border: '#DDDFE1',
-  inverse: '#2F3D4A',
-  shaft: '#333',
-  ///////////////
-  // Grays
-  ///////////////
-  dim_grey: '#696969',
-  dove_gray: '#d5d5d5',
-  body_bg: '#f3f6f9',
-  light_gray: 'rgb(230,230,230)',
-  ///////////////
-  // Solid Color
-  ///////////////
-  white: '#fff',
-  black: '#000',
-};
-
-export const theme = createTheme({
+export const lightTheme: DefaultTheme = {
   palette: {
-    primary: { main: '#5f2c3e' },
-    secondary: { main: '#d1adcc' },
+    appBgColor: '#f8f8ff',
+    bgColor: '#fff',
+    shadowColor: '0px 1px 4px rgba(0,0,0,0.15)',
+    borderColor: '#dbdbdb',
+    black: 'black',
+    white: 'white',
+    green: '#2eb471',
+    red: '#eb144c',
+    gray: '#e6e6e6',
   },
-
-  components: {
-    MuiButton: {
-      defaultProps: {
-        disableRipple: true,
-        disableElevation: true,
-        disableFocusRipple: true,
-        disableTouchRipple: true,
-      },
-    },
+  device: {
+    mobile: `screen and (max-width: 425px)`,
+    tablet: `screen and (max-width: 768px)`,
+    laptop: `screen and (max-width: 1024px)`,
   },
-});
+};
