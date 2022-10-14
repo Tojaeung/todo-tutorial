@@ -2,8 +2,10 @@ import type { GetServerSideProps, NextPage } from 'next';
 import axios from 'axios';
 import styled from 'styled-components';
 import HeadMeta from '@components/HeadMeta';
-import TodoList from '@components/TodoList';
-import { TodoType } from '@interfaces/todo';
+import { useAppDispatch, useAppSelector } from '@hooks/redux.hook';
+import TodoList from '@features/todos';
+import { fetchTodos } from '@features/todos/todos.thunk';
+import { TodoType, selectTodos } from '@features/todos/todos.slice';
 
 const Home: NextPage<{ todos: TodoType[] }> = ({ todos }) => {
   return (
@@ -22,7 +24,14 @@ const Home: NextPage<{ todos: TodoType[] }> = ({ todos }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const todos = await axios(`${process.env.NEXT_PUBLIC_API_URL}/todos`).then((res) => res.data);
+  const dispatch = useAppDispatch();
+  const todos = useAppSelector(selectTodos);
+  try {
+    await dispatch(fetchTodos);
+  } catch (err: any) {
+    alert(err.msg);
+  }
+
   return { props: { todos } };
 };
 

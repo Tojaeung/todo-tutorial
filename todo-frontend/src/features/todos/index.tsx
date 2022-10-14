@@ -1,18 +1,25 @@
 import axios from 'axios';
 import { useState } from 'react';
 import styled from 'styled-components';
-import { TodoType } from '@interfaces/todo';
+import { useAppDispatch } from '@hooks/redux.hook';
+import type { TodoType } from './todos.slice';
+import { createTodo } from './todos.thunk';
 
 interface IProps {
   todos: TodoType[];
 }
 
 function TodoList({ todos }: IProps) {
+  const dispatch = useAppDispatch();
+
   const [todo, setTodo] = useState('');
-  // const [todos, setTodos] = useState<TodoType[]>([]);
 
   const addTodo = async () => {
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/todos`, { name: todo, completed: false });
+    try {
+      await dispatch(createTodo({ name: todo, completed: false }));
+    } catch (err: any) {
+      alert(err.msg);
+    }
   };
 
   return (

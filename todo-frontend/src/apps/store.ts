@@ -2,13 +2,15 @@ import { configureStore, Reducer, AnyAction, ThunkAction, Action, CombinedState 
 import { HYDRATE, createWrapper } from 'next-redux-wrapper';
 import { combineReducers } from 'redux';
 
-import authSlice, { AuthState } from '../features/auth/auth.slice';
-import userSlice, { UserState } from '../features/user/user.slice';
+import authSlice, { AuthState } from '@features/auth/auth.slice';
+import userSlice, { UserState } from '@features/user/user.slice';
+import todosSlice, { TodoState } from '@features/todos/todos.slice';
 
 // ### 리듀서 State 타입 정의
-export interface ReducerStates {
+interface ReducerStates {
   auth: AuthState;
   user: UserState;
+  todos: TodoState;
 }
 
 // ### 루트 리듀서 생성
@@ -26,6 +28,7 @@ const rootReducer = (state: ReducerStates, action: AnyAction): CombinedState<Red
       const combinedReducer = combineReducers({
         auth: authSlice.reducer,
         user: userSlice.reducer,
+        todos: todosSlice.reducer,
       });
       return combinedReducer(state, action);
     }
