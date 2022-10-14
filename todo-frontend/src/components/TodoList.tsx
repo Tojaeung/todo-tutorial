@@ -1,55 +1,58 @@
+import axios from 'axios';
 import { useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import { colors } from '@styles/theme';
+import styled from 'styled-components';
+import { TodoType } from '@interfaces/todo';
 
-function TodoList() {
+interface IProps {
+  todos: TodoType[];
+}
+
+function TodoList({ todos }: IProps) {
   const [todo, setTodo] = useState('');
-  const [checked, setChecked] = useState([1]);
+  // const [todos, setTodos] = useState<TodoType[]>([]);
 
-  const handleToggle = (value: number) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
+  const addTodo = async () => {
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/todos`, { name: todo, completed: false });
   };
 
   return (
-    <Box>
-      <TextField variant="standard" label="입력" size="medium" onChange={(e) => setTodo(e.target.value)} />
-      <Button variant="contained" size="medium" color="secondary">
-        추가
-      </Button>
-
-      <List sx={{ mt: '20px', bgcolor: colors.body_bg }}>
-        {[0, 1, 2, 3].map((value) => {
-          return (
-            <ListItem
-              key={value}
-              secondaryAction={
-                <Checkbox edge="end" onChange={handleToggle(value)} checked={checked.indexOf(value) !== -1} />
-              }
-              disablePadding
-            >
-              <ListItemButton>
-                <ListItemText primary={`Line item ${value + 1}`} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </List>
-    </Box>
+    <Container>
+      <TodoInputBox>
+        <TodoInput onChange={(e) => setTodo(e.target.value)} />
+        <AddTodoButton onClick={addTodo}>추가</AddTodoButton>
+      </TodoInputBox>
+      <ul>
+        {todos.map((todo) => (
+          <li>{todo.name}</li>
+        ))}
+      </ul>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const TodoInputBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+const TodoInput = styled.input`
+  padding: 10px 5px;
+  font-size: 15px;
+  outline: none;
+`;
+const AddTodoButton = styled.button`
+  font-size: 17px;
+  border: none;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.palette.green};
+  color: white;
+  cursor: pointer;
+`;
 
 export default TodoList;

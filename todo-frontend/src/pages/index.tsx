@@ -1,40 +1,39 @@
+import type { GetServerSideProps, NextPage } from 'next';
+import axios from 'axios';
+import styled from 'styled-components';
 import HeadMeta from '@components/HeadMeta';
 import TodoList from '@components/TodoList';
-import { Container, Typography } from '@mui/material';
-import type { NextPage } from 'next';
+import { TodoType } from '@interfaces/todo';
 
-const Home: NextPage = () => {
+const Home: NextPage<{ todos: TodoType[] }> = ({ todos }) => {
   return (
-    <Container
-      maxWidth="sm"
-      sx={{
-        margin: '0 1',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '10px',
-      }}
-    >
+    <Container>
       <HeadMeta
         title="todoApp"
-        description="간단한 투두앱"
+        description="나다호다"
         image="http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg"
         url="https://www.naver.com"
       />
-      <Typography sx={{ p: '40px 0' }} variant="h3">
-        간단한 Todo App
-      </Typography>
-      <TodoList />
+
+      <Title>간단한 Todo App</Title>
+      <TodoList todos={todos} />
     </Container>
   );
 };
 
-// export const getServerSideProps = async () => {
-//   const todos = await axios.get('http://localhost:8080/todos');
+export const getServerSideProps: GetServerSideProps = async () => {
+  const todos = await axios(`${process.env.NEXT_PUBLIC_API_URL}/todos`).then((res) => res.data);
+  return { props: { todos } };
+};
 
-//   return {
-//     props: { todos },
-//   };
-// };
+const Container = styled.div`
+  margin: 0 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Title = styled.h1`
+  font-size: 30px;
+`;
 
 export default Home;
