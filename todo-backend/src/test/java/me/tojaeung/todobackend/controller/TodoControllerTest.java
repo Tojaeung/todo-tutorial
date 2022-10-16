@@ -1,7 +1,7 @@
 package me.tojaeung.todobackend.controller;
 
 import me.tojaeung.todobackend.domain.Todo;
-import me.tojaeung.todobackend.dto.TodoDto;
+import me.tojaeung.todobackend.dto.response.TodoDto;
 import me.tojaeung.todobackend.service.TodoService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

@@ -1,4 +1,4 @@
-package me.tojaeung.todobackend.dto;
+package me.tojaeung.todobackend.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Getter;

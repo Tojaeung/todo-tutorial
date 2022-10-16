@@ -2,14 +2,13 @@ package me.tojaeung.todobackend.service;
 
 import lombok.RequiredArgsConstructor;
 import me.tojaeung.todobackend.domain.Todo;
-import me.tojaeung.todobackend.dto.CreateTodoDto;
-import me.tojaeung.todobackend.dto.TodoDto;
-import me.tojaeung.todobackend.dto.UpdateTodoDto;
-import me.tojaeung.todobackend.exception.TodoException;
+import me.tojaeung.todobackend.dto.request.CreateTodoDto;
+import me.tojaeung.todobackend.dto.request.UpdateTodoDto;
+import me.tojaeung.todobackend.dto.response.TodoDto;
+import me.tojaeung.todobackend.exception.BusinessException;
+import me.tojaeung.todobackend.exception.ExceptionData;
 import me.tojaeung.todobackend.repository.TodoRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +38,7 @@ public class TodoService {
     public TodoDto getTodoById(Long id) {
         Optional<Todo> todo = todoRepository.findById(id);
         if (todo.isPresent()) return new TodoDto(todo.get());
-        else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "존재하지 않는 todo입니다.");
+        else throw new BusinessException(ExceptionData.NOT_EXISTING_TODO);
     }
 
     public TodoDto updateTodo(Long id, UpdateTodoDto updateTodoDto) {
@@ -51,7 +50,7 @@ public class TodoService {
 
             return new TodoDto(todo.get()); 
         } else {
-            throw new TodoException(404, "업데이트 todo를 찾을 수 없습니다.");
+            throw new BusinessException(ExceptionData.NOT_FIND_UPDATED_TODO);
         }
     }
 

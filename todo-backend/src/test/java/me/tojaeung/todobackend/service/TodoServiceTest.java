@@ -1,7 +1,7 @@
 package me.tojaeung.todobackend.service;
 
 import me.tojaeung.todobackend.domain.Todo;
-import me.tojaeung.todobackend.dto.TodoDto;
+import me.tojaeung.todobackend.dto.response.TodoDto;
 import me.tojaeung.todobackend.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
